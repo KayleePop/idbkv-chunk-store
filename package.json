@@ -37,6 +37,7 @@
     "faucet": "0.0.1"
   },
   "dependencies": {
+    "blob-to-buffer": "^1.2.8",
     "idb-kv": "^2.0.0"
   }
 }
