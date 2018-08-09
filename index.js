@@ -1,5 +1,7 @@
 const Idbkv = require('idb-kv')
 
+function noop () {}
+
 module.exports = class {
   constructor (chunkLength, {length = Infinity, name = 'idbkv-chunk-store', batchInterval = 10} = {}) {
     this._store = new Idbkv(name, {batchInterval: batchInterval})
@@ -10,21 +12,19 @@ module.exports = class {
       this.lastChunkIndex = Math.ceil(length / this.chunkLength) - 1 // subtract 1 because it's a 0 based index
     }
   }
-  put (index, buffer, cb) {
+  put (index, buffer, cb = noop) {
     if (index === this.lastChunkIndex) {
       if (buffer.length !== this.lastChunkLength) {
-        // only call cb if it's defined
-        return cb && cb(new Error(`Last chunk's length must be ${this.lastChunkLength}`))
+        return cb(new Error(`Last chunk's length must be ${this.lastChunkLength}`))
       }
     } else {
       if (buffer.length !== this.chunkLength) {
-        // only call cb if it's defined
-        return cb && cb(new Error(`Chunk length must be ${this.chunkLength}`))
+        return cb(new Error(`Chunk length must be ${this.chunkLength}`))
       }
     }
 
     // unused promise handlers add overhead
-    if (!cb) return this._store.set(index, buffer)
+    if (cb === noop) return this._store.set(index, buffer)
 
     this._store.set(index, buffer)
       .then(cb) // doesn't resolve with any data
@@ -47,12 +47,12 @@ module.exports = class {
       })
       .catch(cb)
   }
-  close (cb = function () {}) {
+  close (cb = noop) {
     this._store.close()
       .then(cb) // doesn't resolve with any data
       .catch(cb)
   }
-  destroy (cb = function () {}) {
+  destroy (cb = noop) {
     this._store.destroy()
       .then(cb) // doesn't resolve with any data
       .catch(cb)
