@@ -4,7 +4,7 @@ function noop () {}
 
 module.exports = class {
   constructor (chunkLength, {length = Infinity, name = 'idbkv-chunk-store', batchInterval = 10} = {}) {
-    this._store = new Idbkv(name, {batchInterval: batchInterval})
+    this._idbkvStore = new Idbkv(name, {batchInterval: batchInterval})
     this.chunkLength = chunkLength
 
     if (length !== Infinity) {
@@ -24,16 +24,16 @@ module.exports = class {
     }
 
     // unused promise handlers add overhead
-    if (cb === noop) return this._store.set(index, buffer)
+    if (cb === noop) return this._idbkvStore.set(index, buffer)
 
-    this._store.set(index, buffer)
+    this._idbkvStore.set(index, buffer)
       .then(cb) // doesn't resolve with any data
       .catch(cb)
   }
   get (index, opts, cb) {
     if (typeof opts === 'function') return this.get(index, {}, opts)
 
-    this._store.get(index)
+    this._idbkvStore.get(index)
       .then(uint8Array => {
         if (uint8Array === undefined) {
           return cb(new Error('Index does not exist in storage'))
@@ -48,12 +48,12 @@ module.exports = class {
       .catch(cb)
   }
   close (cb = noop) {
-    this._store.close()
+    this._idbkvStore.close()
       .then(cb) // doesn't resolve with any data
       .catch(cb)
   }
   destroy (cb = noop) {
-    this._store.destroy()
+    this._idbkvStore.destroy()
       .then(cb) // doesn't resolve with any data
       .catch(cb)
   }
