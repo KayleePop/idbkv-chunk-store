@@ -23,9 +23,6 @@ module.exports = class {
       }
     }
 
-    // unused promise handlers add overhead
-    if (cb === noop) return this._idbkvStore.set(index, buffer)
-
     this._idbkvStore.set(index, buffer)
       .then(cb) // doesn't resolve with any data
       .catch(cb)
