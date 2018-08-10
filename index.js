@@ -37,18 +37,20 @@ module.exports = class IdbkvChunkStore {
   get (index, opts, cb) {
     if (typeof opts === 'function') return this.get(index, {}, opts)
 
+    if (!opts) opts = {}
+
     this._idbkvStore.get(index)
       .then(blob => {
         if (blob === undefined) {
           return cb(new Error('Index does not exist in storage'))
         }
 
-        const offset = (opts && opts.offset) || 0
-        const length = (opts && opts.length) || (blob.size - offset)
+        const offset = opts.offset || 0
+        const length = opts.length || (blob.size - offset)
 
         blob = blob.slice(offset, offset + length)
 
-        if (opts && opts.returnBlob) {
+        if (opts.returnBlob) {
           cb(null, blob)
         } else {
           blobToBuffer(blob, cb)
