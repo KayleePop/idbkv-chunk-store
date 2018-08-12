@@ -37,6 +37,18 @@ store.put(0, Buffer.from('0123456789'), (err) => {
 })
 ```
 
+## Blobs
+
+There's also a new option for get() that allows a Blob to be returned instead of a Buffer.
+```js
+store.get(0,
+  {returnBlob: true}, // default is false to return a Buffer
+  (err, blob) => console.log(blob instanceof Blob) // outputs true
+)
+```
+
+This is beneficial because indexedDB returns a pointer to the data in a stored blob instead of loading it all into memory immediately.
+
 ## Compatibility
 
 [idb-kv](https://github.com/kayleepop/idb-kv) uses [async functions](https://caniuse.com/#search=async%20functions), so those need to be supported to use this library.
