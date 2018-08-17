@@ -4,7 +4,7 @@
   "description": "Abstract chunk store built on idb-kv: the lightweight and simple API for indexeddb with automatic batching",
   "main": "index.js",
   "scripts": {
-    "test": "browserify test.js | tape-run"
+    "test": "standard && browserify test.js | tape-run"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,7 @@
   "devDependencies": {
     "abstract-chunk-store": "^1.4.0",
     "browserify": "^16.2.2",
+    "standard": "^11.0.1",
     "tape": "^4.9.1",
     "tape-run": "^4.0.0"
   },
