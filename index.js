@@ -3,8 +3,8 @@ const Idbkv = require('idb-kv')
 function noop () {}
 
 module.exports = class IdbkvChunkStore {
-  constructor (chunkLength, {length = Infinity, name = 'idbkv-chunk-store', batchInterval = 10} = {}) {
-    this._idbkvStore = new Idbkv(name, {batchInterval: batchInterval})
+  constructor (chunkLength, { length = Infinity, name = 'idbkv-chunk-store', batchInterval = 10 } = {}) {
+    this._idbkvStore = new Idbkv(name, { batchInterval: batchInterval })
     this.chunkLength = chunkLength
 
     if (length !== Infinity) {
