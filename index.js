@@ -27,7 +27,7 @@ module.exports = class IdbkvChunkStore {
 
     // store buffers as blobs to allow partial lookups without loading the entire chunk into memory
     // indexedDB returns a pointer to the data in a blob instead of loading it into memory immediately
-    const blob = new window.Blob([buffer], {type: 'application/octet-stream'})
+    const blob = new window.Blob([buffer], { type: 'application/octet-stream' })
 
     this._idbkvStore.set(index, blob)
       .then(cb) // doesn't resolve with any data

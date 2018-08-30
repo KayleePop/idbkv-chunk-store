@@ -66,11 +66,11 @@ test('opts.length should allow partial last chunks', (t) => {
 })
 
 test('get() opts.returnBlob', (t) => {
-  createCleanStore(10, {name: 'blob-test'}, (store) => {
+  createCleanStore(10, { name: 'blob-test' }, (store) => {
     const buffer = Buffer.from('0123456789')
     store.put(0, buffer, (err) => {
       t.error(err)
-      store.get(0, {returnBlob: true}, (err, blob) => {
+      store.get(0, { returnBlob: true }, (err, blob) => {
         t.error(err)
         t.deepEquals(blob, new window.Blob([buffer]), 'output should equal the blob version of input')
         t.ok(blob instanceof window.Blob, 'should return instance of blob')
