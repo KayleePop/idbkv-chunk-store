@@ -1,6 +1,6 @@
 {
   "name": "idbkv-chunk-store",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Abstract chunk store built on idb-kv: the lightweight and simple API for indexeddb with automatic batching",
   "main": "index.js",
   "scripts": {
