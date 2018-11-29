@@ -37,6 +37,6 @@
     "faucet": "0.0.1"
   },
   "dependencies": {
-    "idb-kv": "^1.3.2"
+    "idb-kv": "^2.0.0"
   }
 }
