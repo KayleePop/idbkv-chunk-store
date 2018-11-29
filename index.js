@@ -12,6 +12,7 @@ module.exports = class IdbkvChunkStore {
       this.lastChunkIndex = Math.ceil(length / this.chunkLength) - 1 // subtract 1 because it's a 0 based index
     }
   }
+
   put (index, buffer, cb = noop) {
     if (index === this.lastChunkIndex) {
       if (buffer.length !== this.lastChunkLength) {
@@ -27,6 +28,7 @@ module.exports = class IdbkvChunkStore {
       .then(cb) // doesn't resolve with any data
       .catch(cb)
   }
+
   get (index, opts, cb) {
     if (typeof opts === 'function') return this.get(index, {}, opts)
 
@@ -44,11 +46,13 @@ module.exports = class IdbkvChunkStore {
       })
       .catch(cb)
   }
+
   close (cb = noop) {
     this._idbkvStore.close()
       .then(cb) // doesn't resolve with any data
       .catch(cb)
   }
+
   destroy (cb = noop) {
     this._idbkvStore.destroy()
       .then(cb) // doesn't resolve with any data
