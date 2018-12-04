@@ -65,6 +65,18 @@ test('opts.length should allow partial last chunks', (t) => {
   })
 })
 
+test('close() should error after destroy()', (t) => {
+  createCleanStore(10, { name: 'close-test' }, (store) => {
+    store.destroy((err) => {
+      t.error(err)
+      store.close((err) => {
+        t.equals(err.message, 'This idb-kv instance has been destroyed')
+        t.end()
+      })
+    })
+  })
+})
+
 // test('Specifying a different chunkLength while loading an existing store via the name option should replace it with an empty store that has the new chunkLength', (t) => {
 //   createCleanStore(10, {name: 'different-length-test'}, (store) => {
 //     store.put(0, '0123456789', () => {

@@ -47,11 +47,13 @@ module.exports = class IdbkvChunkStore {
       .catch(cb)
   }
 
-  async close (cb = noop) {
-    const db = await this._idbkvStore.db
-    db.close()
-
-    cb()
+  close (cb = noop) {
+    this._idbkvStore.db
+      .then((db) => {
+        db.close()
+        cb()
+      })
+      .catch(cb)
   }
 
   destroy (cb = noop) {
