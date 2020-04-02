@@ -1,5 +1,5 @@
 # idbkv-chunk-store
-[![Greenkeeper badge](https://badges.greenkeeper.io/KayleePop/idbkv-chunk-store.svg)](https://greenkeeper.io/)
+
 [![Travis badge](https://travis-ci.org/KayleePop/idbkv-chunk-store.svg?branch=master)](https://travis-ci.org/#)
 [![standard badge](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![npm](https://img.shields.io/npm/v/idbkv-chunk-store.svg)](https://www.npmjs.com/package/idbkv-chunk-store)
