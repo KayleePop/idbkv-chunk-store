@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "abstract-chunk-store": "^1.4.0",
-    "browserify": "^16.2.2",
+    "browserify": "^17.0.0",
     "standard": "^14.0.0",
     "tape": "^5.0.1",
     "tape-run": "^8.0.0",
